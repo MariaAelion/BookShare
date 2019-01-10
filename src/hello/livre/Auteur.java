@@ -3,7 +3,12 @@
  */
 package hello.livre;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
+
+import hello.livre.exceptions.BirthDateException;
 
 /**
  * @author Dell
@@ -21,13 +26,42 @@ public class Auteur {
 		this.naissance=naissance;
 	}
 //methode static qui fait ce que l'on veut
-	public static Auteur getAuteur(String nom, String prenom, Date naissance) {
+	public static Auteur getAuteur(String nom, String prenom, Date naissance) throws BirthDateException {
 		Date today = new Date();
 		if(naissance.after(today)) {
-			return null;
+			throw new BirthDateException();
+			//return null;
 		} 
 		Auteur auteur = new Auteur(nom,prenom,naissance);
 		return auteur;
+	} 
+	
+	public static Auteur getAuteur() throws ParseException, BirthDateException   {
+		Scanner scanner = new Scanner(System.in);
+				
+		System.out.println("Nom de l'auteur");
+		String nom=scanner.nextLine(); // ecrit et recupere apres entree
+		scanner.nextLine(); // reunitialise la memeoir tampon entree pour pouvoir retaper
+				
+	System.out.println("Prenom de l'auteur");
+	String prenom=scanner.nextLine();
+	scanner.nextLine();
+				
+	System.out.println("Date de naissance");
+	String naissance =scanner.nextLine();
+				
+	//convertir naissance en type date
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	Date date = format.parse(naissance); // la date de naissance devient date en format date ajouter parse exception
+		
+	scanner.nextLine(); // vide la memoire
+	scanner.close();//fermer l attente de la console
+						
+			
+				
+	//on peut instancier un nouvel auteur à partir des informations
+return getAuteur (nom,prenom,date);
+		
 	}
 	/**
 	 * @return the nom

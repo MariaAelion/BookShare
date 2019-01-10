@@ -1,15 +1,18 @@
 package hello.utilisateurs;
 
-import java.util.ArrayList;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import hello.livre.Livre;
 import hello.utilisateurs.interfaces.LoueurInterface;
 
 public class Loueur extends Utilisateur implements LoueurInterface{
-	private ArrayList <Livre> books;
+	private HashMap <Livre, Integer> books;
 	
 	public Loueur() { // constructeur
-		this.books = new ArrayList<Livre>();
+		//instancie l'objet HashMap proprement dit
+		this.books = new HashMap<Livre, Integer>();
 	}
 
 	public String booksNumber() { //on peut aussi l'afficher
@@ -22,8 +25,9 @@ public class Loueur extends Utilisateur implements LoueurInterface{
 		String message = "Livres de la collection de " + this.nom + "\n";
 		
 		//boucle sur la collection des livres
-		for (Livre livre : this.books) {
-			message += livre.titre()+ "\n";
+		for (Map.Entry<Livre,Integer> stockLivres : this.books.entrySet()) { //recupere chaque elt a chaq iteration
+			
+		message += stockLivres.getKey().titre()+ "   & le nombre (" + stockLivres.getValue() + ")\n";
 		}
 		return message;
 	}
@@ -32,8 +36,19 @@ public class Loueur extends Utilisateur implements LoueurInterface{
 	@Override
 	public Utilisateur addBook(Livre livre) {
 		// TODO Auto-generated method stub
-		if (!this.books.contains(livre)) 
-		this.books.add(livre);
+	 //put comme add pour hashmap 
+		
+		if (this.books.containsKey(livre)) { // cherche si livre est deja et si oui on ajoute plus 1
+			Integer oldValue = this.books.get(livre); 
+			oldValue=oldValue+1;
+			this.books.replace(livre, oldValue); // ou oldValue++
+			
+		}else {
+			this.books.put(livre, 1); //put comme add pour hashmap donc etait pas dans coll donc je l'ajoute et met 1 exemplaire
+		}
+			
+		//	if (!this.books.contains(livre)) 
+		//this.books.add(livre);
 		
 		return this;
 		}
@@ -42,7 +57,15 @@ public class Loueur extends Utilisateur implements LoueurInterface{
 	@Override
 	public Utilisateur loan(Livre livre) {
 		// TODO Auto-generated method stub
-		return null;
+				
+		if (this.books.containsKey(livre) && this.books.get(livre) >0) {
+			Integer oldValue = this.books.get(livre); 
+			oldValue=oldValue-1;
+			this.books.replace(livre, oldValue);	
+				
+		}
+		
+			return this;
 	}
 
 	@Override

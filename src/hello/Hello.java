@@ -9,6 +9,7 @@ import java.util.Date;
 
 import hello.livre.Auteur;
 import hello.livre.Livre;
+import hello.livre.exceptions.BirthDateException;
 
 /**
  * @author Dell
@@ -19,8 +20,9 @@ public class Hello {
 	/**
 	 * @param args
 	 * @throws ParseException 
+	 * @throws BirthDateException 
 	 */
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws ParseException, BirthDateException {
 		// TODO Auto-generated method stub
 		System.out.println("Hello Java");
 		
@@ -67,14 +69,25 @@ public class Hello {
 		//auteur?
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = format.parse("2020-01-02");
-		Auteur hugo = Auteur.getAuteur("Hugo","Victor",date);
-		if(hugo==null) {
+		Auteur hugo ;  
+		
+		//ajout exception
+		try {
+			hugo= Auteur.getAuteur("Hugo","Victor",date);
+		} catch (BirthDateException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		/*if(hugo==null) {
 			System.out.println("Impossible d'instancier hugo");
 			
 		}else {
 			System.out.println("Auteur" + hugo.getNom());
 		}
-		
+		*/
 		
 		
 		

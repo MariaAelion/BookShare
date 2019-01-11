@@ -25,7 +25,7 @@ public class Auteur {
 		this.prenom=prenom;
 		this.naissance=naissance;
 	}
-//methode static qui fait ce que l'on veut
+//methode static qui fait ce que l'on veut, get cree nouvel auteur et le retourne 
 	public static Auteur getAuteur(String nom, String prenom, Date naissance) throws BirthDateException {
 		Date today = new Date();
 		if(naissance.after(today)) {
@@ -33,7 +33,7 @@ public class Auteur {
 			//return null;
 		} 
 		Auteur auteur = new Auteur(nom,prenom,naissance);
-		return auteur;
+		return auteur; // rtourne un objet ici class factory
 	} 
 	
 	public static Auteur getAuteur() throws ParseException, BirthDateException   {
@@ -75,7 +75,7 @@ return getAuteur (nom,prenom,date);
 	 */
 	public Auteur setNom(String nom) {
 		this.nom = nom;
-		return this;
+		return this; //optionnel on le met parce que ont fait du chainage 
 	}
 
 	/**

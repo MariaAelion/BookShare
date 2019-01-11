@@ -22,22 +22,21 @@ public class AuteurImport {
 	
 	private static final String FIELD_SEP= ";" ; // variable de classe
 	
-	private ArrayList <String[]> auteurs; 
-	// array liste specifie par un tableau de chaine
+	private ArrayList <String[]> auteurs; 	// array liste specifie par un tableau de chaine
 	
 	//TODO ajouter un moyen de definir si oui ou non il ya une ligne d'en tete
 	
-	public AuteurImport() {
+	public AuteurImport() { //constructeur
 		
 		// instancier le arraylist
-		this.auteurs=new ArrayList<String[]>(); //instancier appelle le constructuer
+		this.auteurs=new ArrayList<String[]>(); //instancier appelle le constructuer initialise ds memoire obj de type chaine
 		
 		
 		//Instancier la classe File donc...creer l'objet auteurFile
 		this.auteurFile= new File("c:\\workspace\\auteurs.txt"); // echapper echappement de windows
-		if(this.auteurFile.exists()) {
-			if(auteurFile.canRead()) {
-				this.process();
+		if(this.auteurFile.exists()) { //methode classe file si existe et peut lire
+			if(auteurFile.canRead()) {//si conditions reunies on entre ds methode qui va traite doc
+				this.process(); //method qui va traiter
 			
 		} else {
 			System.out.println("le fichier n'est pas lisible");
@@ -49,15 +48,12 @@ public class AuteurImport {
 		}
 		
 		}
-	//getter pour instancier new auteur
-			public ArrayList <String[]> getAuteurs(){
+	//getter pour instancier 
+			public ArrayList <String[]> getAuteurs(){ 
 				return this.auteurs;
 }
-	
 			
-			
-			
-			
+				
 			
 	/**
 	 * TODO trouver un moyen de compter le nombre de colonnes 
@@ -66,10 +62,10 @@ public class AuteurImport {
 	private void process() { 
 		// TODO compter le nombre de colonnes dans une ligne lue
 		try {
-			Scanner fileScanner= new Scanner(auteurFile);
+			Scanner fileScanner= new Scanner(auteurFile); //scanner pcq pas bcp de lignes ds fichier iterateur
 			
 			int rowCount=0;
-			while(fileScanner.hasNext()) {
+			while(fileScanner.hasNext()) { //boucles tant que y en a parcours , retourne booleen tant qu true
 				String row=fileScanner.nextLine();
 				
 				if(rowCount>0) { // enleve l entete

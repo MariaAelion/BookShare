@@ -102,24 +102,19 @@ public class CreateUsers {
 	ArrayList<String[]> lesAuteursImportes=auteurs.getAuteurs(); // renvoie liste ds laquelle g tableau de chaine dans lesAuteursimportes
 	
 	//boucler sur la liste des auteurs
-	for (String[] unAuteur : lesAuteursImportes) { // a chaque v
+	for (String[] unAuteur : lesAuteursImportes) { // 
 		
-			try { 
+			try { //fait une instance d'un auteur
 		SimpleDateFormat leFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date laDate = format.parse(unAuteur[2]);
 		listeAuteurs.add (Auteur.getAuteur (unAuteur[0],unAuteur[1],laDate));
 			
-		} catch (Exception e) {
+		} catch (Exception e) { // prend toutes les excpetions de la classe mere pour fais s embeter
 			//NOOP
 			
 		}
 		
 	}
-		
-
-	
-	
-	
 	
 	}
 	

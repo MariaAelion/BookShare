@@ -39,7 +39,7 @@ public class Loueur extends Utilisateur implements LoueurInterface{
 		String message= " Nombre de livres : ";
 		message +=this.books.size(); // concatenation
 		return message;
-	} */ premiere facon sans interface fctionnelle
+	} */ // premiere facon sans interface fctionnelle
 	
 	public String booksNumber() { //on peut aussi l'afficher
 		String message= " Nombre de livres : ";
